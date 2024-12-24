@@ -1,0 +1,35 @@
+// Prisma schema for the school application
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Grant {
+  id        String   @id @default(uuid())
+  wallet    String // Wallet address of the user
+  tokens    String // Amount of tokens involved in the grant
+  txHash    String // Transaction hash
+  ip        String // IP address of the user
+  isValid   Boolean? // NULL = not checked, true = valid, false = not valid
+  createdAt DateTime @default(now())
+}
+
+model Campaign {
+  id                    String   @id @default(uuid())
+  chainName             String // Name of the blockchain network
+  name                  String // Name of the campaign
+  targetAmount          String // Target amount of tokens for the campaign
+  currentAmount         String // Current amount of tokens collected
+  validator             String // Validator address
+  validatorName         String // Validator Name
+  validatorImage        String // Validator Image
+  campaignWalletAddress String // Wallet address which will hold grants
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}

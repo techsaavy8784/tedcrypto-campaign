@@ -1,0 +1,12 @@
+.idea
+!.env.dist
+.env.local
+keys/
+scripts/
+!keys/.gitkeep
+config/*
+!config/.gitkeep
+!config/configuration.yaml.dist
+node_modules/
+configuration.yaml
+dist/
